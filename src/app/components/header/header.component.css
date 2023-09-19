@@ -1,0 +1,16 @@
+.header {
+  display: flex;
+  padding: 20px 40px;
+  background-color: darkblue;
+  color: white;
+}
+
+.header > p {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.header > app-cart {
+  margin-left: auto;
+}

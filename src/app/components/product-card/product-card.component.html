@@ -1,0 +1,6 @@
+<div class="card-container" (click)="onClick()">
+  <img [src]="product.thumbnail" [alt]="product.title">
+  <h4>{{ product.title }}</h4>
+  <ngb-rating [(rate)]="product.rating" [readonly]="true" [max]="5"></ngb-rating>
+  <span>{{ product.rating }}</span>
+</div>

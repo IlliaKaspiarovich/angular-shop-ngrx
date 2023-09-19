@@ -1,0 +1,60 @@
+.modal-bg {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(58, 58, 58, 0.8);
+  z-index: 10000;
+}
+
+.modal-container {
+  position: relative;
+  width: 1100px;
+  height: 500px;
+  display: flex;
+  align-items: start;
+  padding: 20px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.cross {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 20px;
+  cursor: pointer;
+}
+
+.modal-container > img {
+  width: 450px;
+  max-height: 460px;
+  object-fit: contain;
+}
+
+.product-content {
+  width: calc(1100px - 40px - 450px);
+  padding: 10px;
+}
+
+.product-content > h2 {
+  font-weight: 700;
+}
+
+.modal-container > button {
+  position: absolute;
+  bottom: 25px;
+  right: 25px;
+  padding: 10px;
+  background-color: darkblue;
+  color: white;
+  border-width: 0;
+  border-radius: 8px;
+}

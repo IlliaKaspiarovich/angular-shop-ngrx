@@ -1,0 +1,7 @@
+<li class="cartItem">
+  <input type="button" value="-" (click)="removeItem()">
+  <span class="times">{{ product.times }}</span>
+  <input type="button" value="+" (click)="addItem()">
+  <span class="title">{{ product.title }}</span>
+  <span class="price">{{ product.price * product.times | currency }}</span>
+</li>
