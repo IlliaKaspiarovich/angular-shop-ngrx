@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
+import { Store } from '@ngrx/store';
 import { Product } from 'src/app/models/product';
-import { ProductsService } from 'src/app/services/products.service';
+import { setActiveProduct } from '../../store/actions';
 
 @Component({
   selector: 'app-product-card',
@@ -13,9 +14,9 @@ import { ProductsService } from 'src/app/services/products.service';
 export class ProductCardComponent {
   @Input() product: Product
 
-  constructor(private productService: ProductsService) { }
+  constructor(private store: Store) { }
 
   onClick() {
-    this.productService.setActiveProduct(this.product)
+    this.store.dispatch(setActiveProduct({ payload: this.product }))
   }
 }

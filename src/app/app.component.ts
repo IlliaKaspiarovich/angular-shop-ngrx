@@ -1,37 +1,27 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { ProductsService } from './services/products.service';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { Product } from './models/product';
+import { loadProducts, setActiveProduct } from './store/actions';
+import { State } from './store/reducer';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit {
   title = 'angular-shop';
-  products: Product[] = []
-  activeProduct: Product | null = null
-  private activeProductSubscription: Subscription
+  products$: Observable<Product[]> = this.store.select(state => state.appStore.products)
+  activeProduct$: Observable<Product | null> = this.store.select(state => state.appStore.activeProduct)
 
-  constructor(private productService: ProductsService) {
-    this.activeProductSubscription = this.productService.activeProductChanges$()
-      .subscribe((product) => {
-        this.activeProduct = product
-      })
-  }
+  constructor(private store: Store<State>) {}
 
   ngOnInit(): void {
-    this.productService.getProducts().subscribe((response) => {
-      this.products = response.products
-    })
-  }
-
-  ngOnDestroy(): void {
-    this.activeProductSubscription.unsubscribe();
+    this.store.dispatch(loadProducts())
   }
 
   closeModal() {
-    this.productService.setActiveProduct(null)
+    this.store.dispatch(setActiveProduct({ payload: null }))
   }
 }

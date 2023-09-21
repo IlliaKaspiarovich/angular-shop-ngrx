@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { CartItem } from 'src/app/models/cartItem';
+import { Store } from '@ngrx/store';
 import { Product } from 'src/app/models/product';
-import { CartService } from 'src/app/services/cart.service';
+import { addToCart, removeFromCart } from 'src/app/store/actions';
 
 @Component({
   selector: 'app-cart-item',
@@ -9,15 +9,15 @@ import { CartService } from 'src/app/services/cart.service';
   styleUrls: ['./cart-item.component.css']
 })
 export class CartItemComponent {
-  @Input() product: Product & CartItem
+  @Input() product: Product & { times: number }
 
-  constructor(private cartService: CartService) {}
+  constructor(private store: Store) {}
 
   addItem() {
-    this.cartService.addCartItemById(this.product.id)
+    this.store.dispatch(addToCart({ payload: this.product.id}))
   }
 
   removeItem() {
-    this.cartService.removeCartItemById(this.product.id)
+    this.store.dispatch(removeFromCart({ payload: this.product.id}))
   }
 }

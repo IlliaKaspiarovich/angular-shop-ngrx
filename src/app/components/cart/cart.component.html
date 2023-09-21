@@ -28,11 +28,11 @@
     <h4>Cart</h4>
     <ul>
       <app-cart-item
-        *ngFor="let product of cartProducts"
+        *ngFor="let product of cartItems$ | async"
         [product]="product"
       ></app-cart-item>
     </ul>
     <hr>
-    <p>Total cost: <span style="font-weight: bold;">{{ totalCost | currency }}</span></p>
+    <p>Total cost: <span style="font-weight: bold;">{{ totalCost$ | async | currency }}</span></p>
   </div>
 </div>

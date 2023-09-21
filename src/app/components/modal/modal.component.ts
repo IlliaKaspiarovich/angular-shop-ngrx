@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Product } from 'src/app/models/product';
-import { CartService } from 'src/app/services/cart.service';
+import { addToCart } from 'src/app/store/actions';
 
 @Component({
   selector: 'app-modal',
@@ -11,7 +12,7 @@ export class ModalComponent {
   @Input() product: Product
   @Output() closeModalEvent = new EventEmitter();
 
-  constructor(private cartService: CartService) { }
+  constructor(private store: Store) { }
 
   closeModal() {
     this.closeModalEvent.emit();
@@ -22,6 +23,6 @@ export class ModalComponent {
   }
 
   addToCart() {
-    this.cartService.addCartItemById(this.product.id)
+    this.store.dispatch(addToCart({ payload: this.product.id }))
   }
 }

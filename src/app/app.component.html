@@ -2,13 +2,13 @@
 
 <div class="products-container">
   <app-product-card
-    *ngFor="let product of products"
+    *ngFor="let product of products$ | async"
     [product]="product"
   ></app-product-card>
 </div>
 
 <app-modal
-  *ngIf="activeProduct !== null"
+  *ngIf="activeProduct$ | async as activeProduct"
   [product]="activeProduct"
   (closeModalEvent)="closeModal()"
 ></app-modal>
